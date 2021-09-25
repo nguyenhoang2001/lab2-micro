@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "led_display_configuration.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -194,26 +194,55 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_Pin|EN0_Pin|EN1_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_Pin */
-  GPIO_InitStruct.Pin = LED_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, LED1_A_Pin|LED1_B_Pin|LED1_C_Pin|LED1_D_Pin
+                          |LED1_E_Pin|LED1_F_Pin|LED1_G_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LED_Pin EN0_Pin EN1_Pin */
+  GPIO_InitStruct.Pin = LED_Pin|EN0_Pin|EN1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED1_A_Pin LED1_B_Pin LED1_C_Pin LED1_D_Pin
+                           LED1_E_Pin LED1_F_Pin LED1_G_Pin */
+  GPIO_InitStruct.Pin = LED1_A_Pin|LED1_B_Pin|LED1_C_Pin|LED1_D_Pin
+                          |LED1_E_Pin|LED1_F_Pin|LED1_G_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
 /* USER CODE BEGIN 4 */
-int counter = 100;
+int counter = 50;
+int change = 1;
+
 void HAL_TIM_PeriodElapsedCallback( TIM_HandleTypeDef *htim ) {
 	counter--;
 	if(counter <= 0) {
-		counter = 100;
-		HAL_GPIO_TogglePin ( LED_GPIO_Port , LED_Pin) ;
+		counter = 50;
+		HAL_GPIO_TogglePin (LED_GPIO_Port ,LED_Pin);
+
+		if(change == 1){
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+			display7SEG1(change);
+			change = 2;
+		}
+		else {
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+			display7SEG1(change);
+			change = 1;
+		}
 	}
 }
 /* USER CODE END 4 */
