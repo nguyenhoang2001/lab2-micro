@@ -6,6 +6,7 @@
  */
 #include "main.h"
 #include "interupt_function.h"
+#define NUMBER_OF_DECIMAL_DIGITS 		10
 
 static uint8_t sevenSegmentLEDConversion[NUMBER_OF_DECIMAL_DIGITS] = {0x01, 0x4f, 0x12, 0x06, 0x4C, 0x24, 0x20, 0x0f, 0x00, 0x04};
 
@@ -53,6 +54,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 		count = 0;
 	}
+
 	if(++countled == 50) {
 		if(typeofled == 0) {
 			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
@@ -66,7 +68,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				}
 		if(typeofled == 2) {
 					HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
-					HAL_GPIO_TogglePin(E20_GPIO_Port, EN2_Pin);
+					HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
 					display7SEG1(3);
 				}
 		if(typeofled == 3) {
@@ -75,10 +77,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 					display7SEG1(0);
 				}
 	countled = 0;
-	}
 	if(typeofled == 3)
-		typeofled = 0;
-	else
-		typeofled++;
+			typeofled = 0;
+		else
+			typeofled++;
+	}
 }
 
