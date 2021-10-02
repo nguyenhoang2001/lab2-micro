@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "interupt_function.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -90,6 +91,12 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  // First set off all leds
+  HAL_GPIO_TogglePin(EN0_GPIO_Port, EN0_Pin);
+  HAL_GPIO_TogglePin(EN1_GPIO_Port, EN1_Pin);
+  HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
+  HAL_GPIO_TogglePin(EN3_GPIO_Port, EN3_Pin);
+  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -225,29 +232,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-int counter = 50;
-int change = 1;
 
-void HAL_TIM_PeriodElapsedCallback( TIM_HandleTypeDef *htim ) {
-	counter--;
-	if(counter <= 0) {
-		counter = 50;
-		HAL_GPIO_TogglePin (LED_GPIO_Port ,LED_Pin);
-
-		if(change == 1){
-			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
-			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
-			display7SEG1(change);
-			change = 2;
-		}
-		else {
-			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
-			display7SEG1(change);
-			change = 1;
-		}
-	}
-}
 /* USER CODE END 4 */
 
 /**
