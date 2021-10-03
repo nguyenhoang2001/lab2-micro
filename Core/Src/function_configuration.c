@@ -24,48 +24,61 @@ void display7SEG1(int num) {
 
 const int MAX_LED = 4;
 int index_led = 0;
-int led_buffer [4] = {1 , 2 , 3 , 4};
+static int led_buffer[4] = {1 , 2 , 3 , 4};
 
 void update7SEG ( int index ) {
 	 index = index % MAX_LED;
 	 switch ( index ) {
 	 case 0:
 		 // Display the first 7 SEG with led_buffer [0]
-		 HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
-		 HAL_GPIO_TogglePin(EN0_GPIO_Port, EN0_Pin);
-		 display7SEG1(0);
-		 break ;
+		 display7SEG1(led_buffer[0]);
+		 break;
 	 case 1:
 		 // Display the second 7 SEG with led_buffer [1]
-		 HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-		 HAL_GPIO_TogglePin(EN1_GPIO_Port, EN1_Pin);
-		 display7SEG1(1);
-		 break ;
+		 display7SEG1(led_buffer[1]);
+		 break;
 	 case 2:
 		 // Display the third 7 SEG with led_buffer [2]
-		 HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
-		 HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
-		 display7SEG1(2);
-		 break ;
+		 display7SEG1(led_buffer[2]);
+		 break;
 	 case 3:
 	 // Display the forth 7 SEG with led_buffer [3]
-		 HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
-		 HAL_GPIO_TogglePin(EN3_GPIO_Port, EN3_Pin);
-		 display7SEG1(3);
-		 break ;
+		 display7SEG1(led_buffer[3]);
+		 break;
 	 default :
-		 break ;
+		 break;
 	 }
  }
 static int count = 0;
 static int countled = 0;
-void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ) {
+static int lednum = 0;
+
+void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim) {
 	if(++count == 100) {
 		HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 		count = 0;
 	}
-	if(++countled == 100) {
+	if(++countled == 10) {
+		if(lednum == 0) {
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
+		}
+		else if(lednum == 1) {
+			HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+		}
+		else if(lednum == 2) {
+			HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 0);
+		}
+		else if(lednum == 3) {
+			HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
+			HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 0);
+		}
 		update7SEG(index_led++);
 		countled = 0;
+		if(++lednum == 4) {
+			lednum = 0;
+		}
 	}
 }

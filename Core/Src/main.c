@@ -89,19 +89,20 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT (& htim2 ) ;
+  HAL_TIM_Base_Start_IT(&htim2) ;
     // First set off all leds
-     HAL_GPIO_TogglePin(EN0_GPIO_Port, EN0_Pin);
-     HAL_GPIO_TogglePin(EN1_GPIO_Port, EN1_Pin);
-     HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
-     HAL_GPIO_TogglePin(EN3_GPIO_Port, EN3_Pin);
-     HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+  HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, 1);
+  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
+  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
