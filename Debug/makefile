@@ -50,6 +50,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 lab2-microcontroller.list \
 
+OBJCOPY_HEX += \
+lab2-microcontroller.hex \
+
 OBJCOPY_BIN += \
 lab2-microcontroller.bin \
 
@@ -76,6 +79,11 @@ lab2-microcontroller.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_
 	@echo 'Finished building: $@'
 	@echo ' '
 
+lab2-microcontroller.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "lab2-microcontroller.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 lab2-microcontroller.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "lab2-microcontroller.bin"
 	@echo 'Finished building: $@'
@@ -83,10 +91,10 @@ lab2-microcontroller.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_D
 
 # Other Targets
 clean:
-	-$(RM) $(SIZE_OUTPUT)$(OBJDUMP_LIST)$(EXECUTABLES)$(OBJS)$(S_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(OBJCOPY_BIN) lab2-microcontroller.elf
+	-$(RM) $(OBJCOPY_HEX)$(SIZE_OUTPUT)$(OBJDUMP_LIST)$(EXECUTABLES)$(OBJS)$(S_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(OBJCOPY_BIN) lab2-microcontroller.elf
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

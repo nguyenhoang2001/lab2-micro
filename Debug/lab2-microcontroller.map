@@ -1976,11 +1976,12 @@ LOAD d:/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externa
                 0x000000000800033c                led2min
  .text.updateClockBuffer.5439
                 0x00000000080003e8       0x7c ./Core/Src/main.o
- .text.main     0x0000000008000464       0x66 ./Core/Src/main.o
+ .text.main     0x0000000008000464       0x64 ./Core/Src/main.o
                 0x0000000008000464                main
  .text.SystemClock_Config
-                0x00000000080004ca       0x76 ./Core/Src/main.o
-                0x00000000080004ca                SystemClock_Config
+                0x00000000080004c8       0x76 ./Core/Src/main.o
+                0x00000000080004c8                SystemClock_Config
+ *fill*         0x000000000800053e        0x2 
  .text.MX_GPIO_Init
                 0x0000000008000540       0xac ./Core/Src/main.o
  .text.Error_Handler

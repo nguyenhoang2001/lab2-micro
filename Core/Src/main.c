@@ -88,7 +88,7 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-  int hour = 15 , minute = 8 , second = 50;
+  int hour = 00 , minute = 8 , second = 50;
 
   void updateClockBuffer() {
 	  led1hour(hour/10);
