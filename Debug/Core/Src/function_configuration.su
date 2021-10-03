@@ -1,0 +1,4 @@
+function_configuration.c:15:6:led1hour	24	static
+function_configuration.c:26:6:led2hour	24	static
+function_configuration.c:37:6:led1min	24	static
+function_configuration.c:48:6:led2min	24	static
