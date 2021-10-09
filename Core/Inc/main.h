@@ -58,48 +58,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define HOUR_LED1_A_Pin GPIO_PIN_1
-#define HOUR_LED1_A_GPIO_Port GPIOA
-#define HOUR_LED1_B_Pin GPIO_PIN_2
-#define HOUR_LED1_B_GPIO_Port GPIOA
-#define HOUR_LED1_C_Pin GPIO_PIN_3
-#define HOUR_LED1_C_GPIO_Port GPIOA
-#define HOUR_LED1_D_Pin GPIO_PIN_4
-#define HOUR_LED1_D_GPIO_Port GPIOA
-#define HOUR_LED1_E_Pin GPIO_PIN_5
-#define HOUR_LED1_E_GPIO_Port GPIOA
-#define HOUR_LED1_F_Pin GPIO_PIN_6
-#define HOUR_LED1_F_GPIO_Port GPIOA
-#define HOUR_LED1_G_Pin GPIO_PIN_7
-#define HOUR_LED1_G_GPIO_Port GPIOA
+#define DOT_Pin GPIO_PIN_4
+#define DOT_GPIO_Port GPIOA
+#define LED_Pin GPIO_PIN_5
+#define LED_GPIO_Port GPIOA
+#define EN0_Pin GPIO_PIN_6
+#define EN0_GPIO_Port GPIOA
+#define EN1_Pin GPIO_PIN_7
+#define EN1_GPIO_Port GPIOA
 #define MIN_LED1_A_Pin GPIO_PIN_0
 #define MIN_LED1_A_GPIO_Port GPIOB
 #define MIN_LED1_B_Pin GPIO_PIN_1
 #define MIN_LED1_B_GPIO_Port GPIOB
 #define MIN_LED1_C_Pin GPIO_PIN_2
 #define MIN_LED1_C_GPIO_Port GPIOB
-#define MIN_LED2_D_Pin GPIO_PIN_10
-#define MIN_LED2_D_GPIO_Port GPIOB
-#define MIN_LED2_E_Pin GPIO_PIN_11
-#define MIN_LED2_E_GPIO_Port GPIOB
-#define MIN_LED2_F_Pin GPIO_PIN_12
-#define MIN_LED2_F_GPIO_Port GPIOB
-#define MIN_LED2_G_Pin GPIO_PIN_13
-#define MIN_LED2_G_GPIO_Port GPIOB
-#define HOUR_LED2_A_Pin GPIO_PIN_8
-#define HOUR_LED2_A_GPIO_Port GPIOA
-#define HOUR_LED2_B_Pin GPIO_PIN_9
-#define HOUR_LED2_B_GPIO_Port GPIOA
-#define HOUR_LED2_C_Pin GPIO_PIN_10
-#define HOUR_LED2_C_GPIO_Port GPIOA
-#define HOUR_LED2_D_Pin GPIO_PIN_11
-#define HOUR_LED2_D_GPIO_Port GPIOA
-#define HOUR_LED2_E_Pin GPIO_PIN_12
-#define HOUR_LED2_E_GPIO_Port GPIOA
-#define HOUR_LED2_F_Pin GPIO_PIN_13
-#define HOUR_LED2_F_GPIO_Port GPIOA
-#define HOUR_LED2_G_Pin GPIO_PIN_14
-#define HOUR_LED2_G_GPIO_Port GPIOA
+#define EN2_Pin GPIO_PIN_8
+#define EN2_GPIO_Port GPIOA
+#define EN3_Pin GPIO_PIN_9
+#define EN3_GPIO_Port GPIOA
 #define MIN_LED1_D_Pin GPIO_PIN_3
 #define MIN_LED1_D_GPIO_Port GPIOB
 #define MIN_LED1_E_Pin GPIO_PIN_4
@@ -108,12 +84,6 @@ void Error_Handler(void);
 #define MIN_LED1_F_GPIO_Port GPIOB
 #define MIN_LED1_G_Pin GPIO_PIN_6
 #define MIN_LED1_G_GPIO_Port GPIOB
-#define MIN_LED2_A_Pin GPIO_PIN_7
-#define MIN_LED2_A_GPIO_Port GPIOB
-#define MIN_LED2_B_Pin GPIO_PIN_8
-#define MIN_LED2_B_GPIO_Port GPIOB
-#define MIN_LED2_C_Pin GPIO_PIN_9
-#define MIN_LED2_C_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

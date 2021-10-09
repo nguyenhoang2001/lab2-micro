@@ -7,9 +7,5 @@
 
 #ifndef INC_FUNCTION_CONFIGURATION_H_
 #define INC_FUNCTION_CONFIGURATION_H_
-
-void led1hour(int num);
-void led2hour(int num);
-void led1min(int num);
-void led2min(int num);
+updateClockBuffer(int hour, int min, int second);
 #endif /* INC_FUNCTION_CONFIGURATION_H_ */

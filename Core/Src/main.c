@@ -19,7 +19,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "function_configuration.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -90,12 +89,6 @@ int main(void)
 
   int hour = 00 , minute = 8 , second = 50;
 
-  void updateClockBuffer() {
-	  led1hour(hour/10);
-	  led2hour(hour%10);
-	  led1min(minute/10);
-	  led2min(minute%10);
-  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,7 +107,7 @@ int main(void)
 	  if( hour >=24) {
 		  hour = 0;
 	  }
-	  updateClockBuffer();
+	  updateClockBuffer(hour, minute, second);
 	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
@@ -173,38 +166,26 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, HOUR_LED1_A_Pin|HOUR_LED1_B_Pin|HOUR_LED1_C_Pin|HOUR_LED1_D_Pin
-                          |HOUR_LED1_E_Pin|HOUR_LED1_F_Pin|HOUR_LED1_G_Pin|HOUR_LED2_A_Pin
-                          |HOUR_LED2_B_Pin|HOUR_LED2_C_Pin|HOUR_LED2_D_Pin|HOUR_LED2_E_Pin
-                          |HOUR_LED2_F_Pin|HOUR_LED2_G_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin|LED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED2_D_Pin
-                          |MIN_LED2_E_Pin|MIN_LED2_F_Pin|MIN_LED2_G_Pin|MIN_LED1_D_Pin
-                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin|MIN_LED2_A_Pin
-                          |MIN_LED2_B_Pin|MIN_LED2_C_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED1_D_Pin
+                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : HOUR_LED1_A_Pin HOUR_LED1_B_Pin HOUR_LED1_C_Pin HOUR_LED1_D_Pin
-                           HOUR_LED1_E_Pin HOUR_LED1_F_Pin HOUR_LED1_G_Pin HOUR_LED2_A_Pin
-                           HOUR_LED2_B_Pin HOUR_LED2_C_Pin HOUR_LED2_D_Pin HOUR_LED2_E_Pin
-                           HOUR_LED2_F_Pin HOUR_LED2_G_Pin */
-  GPIO_InitStruct.Pin = HOUR_LED1_A_Pin|HOUR_LED1_B_Pin|HOUR_LED1_C_Pin|HOUR_LED1_D_Pin
-                          |HOUR_LED1_E_Pin|HOUR_LED1_F_Pin|HOUR_LED1_G_Pin|HOUR_LED2_A_Pin
-                          |HOUR_LED2_B_Pin|HOUR_LED2_C_Pin|HOUR_LED2_D_Pin|HOUR_LED2_E_Pin
-                          |HOUR_LED2_F_Pin|HOUR_LED2_G_Pin;
+  /*Configure GPIO pins : DOT_Pin LED_Pin EN0_Pin EN1_Pin
+                           EN2_Pin EN3_Pin */
+  GPIO_InitStruct.Pin = DOT_Pin|LED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : MIN_LED1_A_Pin MIN_LED1_B_Pin MIN_LED1_C_Pin MIN_LED2_D_Pin
-                           MIN_LED2_E_Pin MIN_LED2_F_Pin MIN_LED2_G_Pin MIN_LED1_D_Pin
-                           MIN_LED1_E_Pin MIN_LED1_F_Pin MIN_LED1_G_Pin MIN_LED2_A_Pin
-                           MIN_LED2_B_Pin MIN_LED2_C_Pin */
-  GPIO_InitStruct.Pin = MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED2_D_Pin
-                          |MIN_LED2_E_Pin|MIN_LED2_F_Pin|MIN_LED2_G_Pin|MIN_LED1_D_Pin
-                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin|MIN_LED2_A_Pin
-                          |MIN_LED2_B_Pin|MIN_LED2_C_Pin;
+  /*Configure GPIO pins : MIN_LED1_A_Pin MIN_LED1_B_Pin MIN_LED1_C_Pin MIN_LED1_D_Pin
+                           MIN_LED1_E_Pin MIN_LED1_F_Pin MIN_LED1_G_Pin */
+  GPIO_InitStruct.Pin = MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED1_D_Pin
+                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
