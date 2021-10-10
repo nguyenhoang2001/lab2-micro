@@ -86,6 +86,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+  //int myindex = 7;
 
   /* USER CODE END 2 */
 
@@ -110,7 +111,6 @@ int main(void)
 	  HAL_Delay(2);
 	  updateLEDMatrix(0);
 	  HAL_Delay(2);
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
