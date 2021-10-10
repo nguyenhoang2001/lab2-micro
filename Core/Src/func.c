@@ -70,14 +70,4 @@ void update7SEG ( int index, int num ) {
 		 break;
 	 }
  }
-void updateClockBuffer(int hour, int min, int timer0_flag) {
-	timer0_flag = 1;
-	update7SEG(0, hour/10);
-	HAL_Delay(50);
-	update7SEG(1, hour % 10);
-	HAL_Delay(50);
-	update7SEG(2, min / 10);
-	HAL_Delay(50);
-	update7SEG(3, min % 10);
-	HAL_Delay(50);
-}
+

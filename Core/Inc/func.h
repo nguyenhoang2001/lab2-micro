@@ -8,6 +8,5 @@
 #ifndef INC_FUNC_H_
 #define INC_FUNC_H_
 
-void updateClockBuffer(int hour, int min, int timer0_flag);
-
+void update7SEG ( int index, int num );
 #endif /* INC_FUNC_H_ */
