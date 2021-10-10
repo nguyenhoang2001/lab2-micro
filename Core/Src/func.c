@@ -9,7 +9,8 @@
 #include "main.h"
 #include "func.h"
 
-static uint8_t row[8] = {0x10, 0x3f, 0x5f, 0xd0, 0xd0, 0x5f, 0x3f, 0x1f};
+static uint8_t row[8] = {0x1f, 0x3f, 0x5f, 0xd0, 0xd0, 0x5f, 0x3f, 0x1f};
+
 void clearcol() {
 			HAL_GPIO_WritePin(ENM0_GPIO_Port, ENM0_Pin, 0);
 			HAL_GPIO_WritePin(ENM1_GPIO_Port, ENM1_Pin, 0);
@@ -24,8 +25,8 @@ void clearcol() {
 void updatecol(int index) {
 
 	if(index == 7)	{
-		HAL_GPIO_WritePin(ENM7_GPIO_Port, ENM7_Pin, 1);
 		HAL_GPIO_WritePin(ENM0_GPIO_Port, ENM0_Pin, 0);
+		HAL_GPIO_WritePin(ENM7_GPIO_Port, ENM7_Pin, 1);
 	}
 	else if(index == 6) {
 		HAL_GPIO_WritePin(ENM7_GPIO_Port, ENM7_Pin, 0);
@@ -52,8 +53,8 @@ void updatecol(int index) {
 		HAL_GPIO_WritePin(ENM1_GPIO_Port, ENM1_Pin, 1);
 	}
 	else if(index == 0){
-		HAL_GPIO_WritePin(ENM1_GPIO_Port, ENM1_Pin, 0);
 		HAL_GPIO_WritePin(ENM0_GPIO_Port, ENM0_Pin, 1);
+		HAL_GPIO_WritePin(ENM1_GPIO_Port, ENM1_Pin, 0);
 	}
 }
 
