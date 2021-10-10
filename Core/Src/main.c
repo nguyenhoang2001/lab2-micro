@@ -96,21 +96,21 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  updateLEDMatrix(7);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(6);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(5);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(4);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(3);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(2);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(1);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
 	  updateLEDMatrix(0);
-	  HAL_Delay(1000);
+	  HAL_Delay(1);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

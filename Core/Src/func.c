@@ -9,7 +9,7 @@
 #include "main.h"
 #include "func.h"
 
-static uint8_t row[8] = {0x1f, 0x3f, 0x5f, 0xd0, 0xd0, 0x5f, 0x3f, 0x1f};
+static uint8_t row[8] = {0x00, 0x3f, 0x5f, 0xd0, 0xd0, 0x5f, 0x3f, 0x1f};
 
 void clearcol() {
 			HAL_GPIO_WritePin(ENM0_GPIO_Port, ENM0_Pin, 0);
@@ -70,6 +70,7 @@ void updaterow(uint8_t num) {
 }
 
 void updateLEDMatrix (int index ) {
+	clearcol();
 	switch(index) {
 	case 7:
 		updatecol(7);
@@ -101,7 +102,7 @@ void updateLEDMatrix (int index ) {
 		break;
 	case 0:
 		updatecol(0);
-		updaterow(row[7]);
+		updaterow(row[0]);
 		break;
 	default:
 		break;
