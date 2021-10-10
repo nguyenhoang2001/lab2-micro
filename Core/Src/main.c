@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "func.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,7 +66,6 @@ void setTimer0 ( int duration ) {
 }
 
 void timer_run () {
-
 	if( timer0_counter > 0) {
 		timer0_counter--;
 		if( timer0_counter == 0) timer0_flag = 1;
@@ -76,6 +75,9 @@ void timer_run () {
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
 	timer_run();
 }
+
+void updateClockBuffer(int, int, int);
+
 /* USER CODE END 0 */
 
 /**
@@ -110,6 +112,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
   setTimer0(1000);
   HAL_TIM_Base_Start_IT(&htim2);
+
+  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
+  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
+
+  int hour = 15, minute = 8 , second = 50;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -117,10 +126,19 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(timer0_flag == 1) {
-	 		  HAL_GPIO_TogglePin (HOUR_LED1_A_GPIO_Port, HOUR_LED1_A_Pin);
-	 		  setTimer0(2000) ;
+	  	  second ++;
+	 	  if ( second >= 60) {
+	 		  second = 0;
+	 		  minute++;
 	 	  }
+	 	  if( minute >= 60) {
+	 		  minute = 0;
+	 		  hour++;
+	 	  }
+	 	  if( hour >=24) {
+	 		  hour = 0;
+	 	  }
+	 	  updateClockBuffer(hour, minute, timer0_flag);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
