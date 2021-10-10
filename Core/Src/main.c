@@ -55,6 +55,7 @@ static void MX_GPIO_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void updateClockBuffer(int, int);
 /* USER CODE END 0 */
 
 /**
@@ -86,8 +87,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
-  int hour = 00 , minute = 8 , second = 50;
+  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
+  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
+  int hour = 15, minute = 8 , second = 50;
 
   /* USER CODE END 2 */
 
@@ -107,8 +111,8 @@ int main(void)
 	  if( hour >=24) {
 		  hour = 0;
 	  }
-	  updateClockBuffer(hour, minute, second);
-	  HAL_Delay(1000);
+	  updateClockBuffer(hour, minute);
+	  //HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -170,8 +174,8 @@ static void MX_GPIO_Init(void)
                           |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED1_D_Pin
-                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LED1_A_Pin|LED1_B_Pin|LED1_C_Pin|LED1_D_Pin
+                          |LED1_E_Pin|LED1_F_Pin|LED1_G_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DOT_Pin LED_Pin EN0_Pin EN1_Pin
                            EN2_Pin EN3_Pin */
@@ -182,10 +186,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : MIN_LED1_A_Pin MIN_LED1_B_Pin MIN_LED1_C_Pin MIN_LED1_D_Pin
-                           MIN_LED1_E_Pin MIN_LED1_F_Pin MIN_LED1_G_Pin */
-  GPIO_InitStruct.Pin = MIN_LED1_A_Pin|MIN_LED1_B_Pin|MIN_LED1_C_Pin|MIN_LED1_D_Pin
-                          |MIN_LED1_E_Pin|MIN_LED1_F_Pin|MIN_LED1_G_Pin;
+  /*Configure GPIO pins : LED1_A_Pin LED1_B_Pin LED1_C_Pin LED1_D_Pin
+                           LED1_E_Pin LED1_F_Pin LED1_G_Pin */
+  GPIO_InitStruct.Pin = LED1_A_Pin|LED1_B_Pin|LED1_C_Pin|LED1_D_Pin
+                          |LED1_E_Pin|LED1_F_Pin|LED1_G_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

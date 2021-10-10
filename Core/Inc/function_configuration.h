@@ -7,5 +7,5 @@
 
 #ifndef INC_FUNCTION_CONFIGURATION_H_
 #define INC_FUNCTION_CONFIGURATION_H_
-updateClockBuffer(int hour, int min, int second);
+void updateClockBuffer(int hour, int min);
 #endif /* INC_FUNCTION_CONFIGURATION_H_ */

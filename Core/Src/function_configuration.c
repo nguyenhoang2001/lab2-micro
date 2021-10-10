@@ -11,6 +11,9 @@
 #define NUMBER_OF_DECIMAL_DIGITS	10
 
 static uint8_t sevenSegmentLEDConversion[NUMBER_OF_DECIMAL_DIGITS] = {0x01, 0x4f, 0x12, 0x06, 0x4C, 0x24, 0x20, 0x0f, 0x00, 0x04};
+const int MAX_LED = 4;
+//int index_led = 0;
+//static int led_buffer[4] = {1 , 2 , 3 , 4};
 
 void display7SEG1(int num) {
 	uint8_t the_number = sevenSegmentLEDConversion[num];
@@ -23,33 +26,58 @@ void display7SEG1(int num) {
 	HAL_GPIO_WritePin(LED1_A_GPIO_Port, LED1_A_Pin, the_number & 0x40);
 }
 
-const int MAX_LED = 4;
-int index_led = 0;
-static int led_buffer[4] = {1 , 2 , 3 , 4};
+void setupled(int index) {
+	if(index == 0) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 1);
+	}
+	else if(index == 1) {
+		HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+	}
+	else if(index == 2) {
+		HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 0);
+	}
+	else {
+		HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, 1);
+		HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 0);
+	}
+}
 
-void update7SEG ( int index ) {
-	 index = index % MAX_LED;
-	 switch ( index ) {
+void update7SEG ( int index, int num ) {
+	 switch (index) {
 	 case 0:
 		 // Display the first 7 SEG with led_buffer [0]
-		 display7SEG1(led_buffer[0]);
+		 setupled(0);
+		 display7SEG1(num);
 		 break;
 	 case 1:
 		 // Display the second 7 SEG with led_buffer [1]
-		 display7SEG1(led_buffer[1]);
+		 setupled(1);
+		 display7SEG1(num);
 		 break;
 	 case 2:
 		 // Display the third 7 SEG with led_buffer [2]
-		 display7SEG1(led_buffer[2]);
+		 setupled(2);
+		 display7SEG1(num);
 		 break;
 	 case 3:
-	 // Display the forth 7 SEG with led_buffer [3]
-		 display7SEG1(led_buffer[3]);
+		 // Display the forth 7 SEG with led_buffer [3]
+		 setupled(3);
+		 display7SEG1(num);
 		 break;
 	 default :
 		 break;
 	 }
  }
-void updateClockBuffer(int hour, int min, int second) {
-
+void updateClockBuffer(int hour, int min) {
+	update7SEG(0, hour/10);
+	HAL_Delay(50);
+	update7SEG(1, hour % 10);
+	HAL_Delay(50);
+	update7SEG(2, min / 10);
+	HAL_Delay(50);
+	update7SEG(3, min % 10);
+	HAL_Delay(50);
 }
